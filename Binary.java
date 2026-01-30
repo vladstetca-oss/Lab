@@ -44,6 +44,77 @@ public class Binary
 			this.number = "0";
 		}
   		*/
+		/**
+ * Bitwise OR of two binary variables
+ */
+public static Binary or(Binary num1, Binary num2)
+{
+    int i = num1.number.length() - 1;
+    int j = num2.number.length() - 1;
+
+    String result = "";
+
+    while (i >= 0 || j >= 0)
+    {
+        char b1 = (i >= 0) ? num1.number.charAt(i) : '0';
+        char b2 = (j >= 0) ? num2.number.charAt(j) : '0';
+
+        result = ((b1 == '1' || b2 == '1') ? "1" : "0") + result;
+
+        i--;
+        j--;
+    }
+
+    return new Binary(result);
+}
+/**
+ * Multiply two binary variables
+ */
+public static Binary multiply(Binary num1, Binary num2)
+{
+    Binary result = new Binary("0");
+    int shift = 0;
+
+    for (int i = num2.number.length() - 1; i >= 0; i--)
+    {
+        if (num2.number.charAt(i) == '1')
+        {
+            String shiftedValue = num1.number;
+            for (int k = 0; k < shift; k++)
+            {
+                shiftedValue += "0";
+            }
+            result = add(result, new Binary(shiftedValue));
+        }
+        shift++;
+    }
+
+    return result;
+}
+/**
+ * Bitwise AND of two binary variables
+ */
+public static Binary and(Binary num1, Binary num2)
+{
+    int i = num1.number.length() - 1;
+    int j = num2.number.length() - 1;
+
+    String result = "";
+
+    while (i >= 0 || j >= 0)
+    {
+        char b1 = (i >= 0) ? num1.number.charAt(i) : '0';
+        char b2 = (j >= 0) ? num2.number.charAt(j) : '0';
+
+        result = ((b1 == '1' && b2 == '1') ? "1" : "0") + result;
+
+        i--;
+        j--;
+    }
+
+    return new Binary(result);
+}
+
 	}
 	/**
 	* Return the binary value of the variable
